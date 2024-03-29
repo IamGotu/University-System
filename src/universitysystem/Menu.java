@@ -27,10 +27,16 @@ public class Menu extends javax.swing.JFrame {
         jMenuBar4 = new javax.swing.JMenuBar();
         jMenu5 = new javax.swing.JMenu();
         jMenu6 = new javax.swing.JMenu();
+        jMenuBar5 = new javax.swing.JMenuBar();
+        jMenu7 = new javax.swing.JMenu();
+        jMenu8 = new javax.swing.JMenu();
         jLabel1 = new javax.swing.JLabel();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        jTabbedPane2 = new javax.swing.JTabbedPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu_department = new javax.swing.JMenu();
         jMenu_instructor = new javax.swing.JMenu();
+        jMenu_classroom = new javax.swing.JMenu();
 
         jMenu3.setText("File");
         jMenuBar2.add(jMenu3);
@@ -49,6 +55,12 @@ public class Menu extends javax.swing.JFrame {
 
         jMenu6.setText("Edit");
         jMenuBar4.add(jMenu6);
+
+        jMenu7.setText("File");
+        jMenuBar5.add(jMenu7);
+
+        jMenu8.setText("Edit");
+        jMenuBar5.add(jMenu8);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("MENU");
@@ -82,6 +94,19 @@ public class Menu extends javax.swing.JFrame {
         });
         jMenuBar1.add(jMenu_instructor);
 
+        jMenu_classroom.setText("CLASSROOM");
+        jMenu_classroom.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu_classroomMouseClicked(evt);
+            }
+        });
+        jMenu_classroom.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu_classroomActionPerformed(evt);
+            }
+        });
+        jMenuBar1.add(jMenu_classroom);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -98,7 +123,7 @@ public class Menu extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(122, 122, 122)
                 .addComponent(jLabel1)
-                .addContainerGap(429, Short.MAX_VALUE))
+                .addContainerGap(431, Short.MAX_VALUE))
         );
 
         pack();
@@ -112,7 +137,7 @@ public class Menu extends javax.swing.JFrame {
     private void jMenu_instructorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu_instructorActionPerformed
 
     }//GEN-LAST:event_jMenu_instructorActionPerformed
-
+    
     private void jMenu_departmentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu_departmentMouseClicked
         DepartmentForm department = new DepartmentForm();
         department.setVisible(true);
@@ -122,6 +147,15 @@ public class Menu extends javax.swing.JFrame {
         InstructorForm instructor = new InstructorForm();
         instructor.setVisible(true);
     }//GEN-LAST:event_jMenu_instructorMouseClicked
+
+    private void jMenu_classroomMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu_classroomMouseClicked
+        ClassroomForm classroom = new ClassroomForm();
+        classroom.setVisible(true);
+    }//GEN-LAST:event_jMenu_classroomMouseClicked
+
+    private void jMenu_classroomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu_classroomActionPerformed
+
+    }//GEN-LAST:event_jMenu_classroomActionPerformed
 
     /**
      * @param args the command line arguments
@@ -166,11 +200,17 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
+    private javax.swing.JMenu jMenu7;
+    private javax.swing.JMenu jMenu8;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenuBar jMenuBar3;
     private javax.swing.JMenuBar jMenuBar4;
+    private javax.swing.JMenuBar jMenuBar5;
+    private javax.swing.JMenu jMenu_classroom;
     private javax.swing.JMenu jMenu_department;
     private javax.swing.JMenu jMenu_instructor;
+    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTabbedPane jTabbedPane2;
     // End of variables declaration//GEN-END:variables
 }

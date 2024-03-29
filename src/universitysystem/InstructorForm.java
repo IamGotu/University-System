@@ -147,7 +147,7 @@ public class InstructorForm extends javax.swing.JFrame {
             }
         });
 
-        btn_edit.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btn_edit.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btn_edit.setText("EDIT");
         btn_edit.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -291,6 +291,7 @@ public class InstructorForm extends javax.swing.JFrame {
 
     private void btn_refreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_refreshActionPerformed
         displayInstructors();
+        clearTextFields(); // Clear text fields
     }//GEN-LAST:event_btn_refreshActionPerformed
 
     private void combo_departmentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo_departmentsActionPerformed
@@ -340,7 +341,7 @@ public class InstructorForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_editMouseClicked
 
     private void btn_editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editActionPerformed
-        getInstructorData();
+        updateInstructorData();
     }//GEN-LAST:event_btn_editActionPerformed
 
     private void table_instructorsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table_instructorsMouseClicked
@@ -427,7 +428,6 @@ public class InstructorForm extends javax.swing.JFrame {
             
            
         } catch(SQLException ex) {
-            //
         }
     }
     
@@ -513,10 +513,46 @@ public class InstructorForm extends javax.swing.JFrame {
         } catch(SQLException ex){
             System.out.println(ex.getMessage());
         }
+    } 
+    
+    // Update instructor data
+    private void updateInstructorData() {
+        DefaultTableModel model = (DefaultTableModel) table_instructors.getModel();
+        int selectedRowIndex = table_instructors.getSelectedRow();
+
+        if (selectedRowIndex == -1) {
+            JOptionPane.showMessageDialog(null, "Please select a row to edit.");
+            return;
+        }
+
+        String id = model.getValueAt(selectedRowIndex, 0).toString();
+        String name = txt_name.getText();
+        String department = combo_departments.getSelectedItem().toString();
+        double salary = Double.parseDouble(txt_salary.getText());
+
+        DatabaseConnection conn = new DatabaseConnection();
+        String query = "UPDATE instructor SET name = ?, dept_name = ?, salary = ? WHERE id = ?";
+
+        try (PreparedStatement pstmt = conn.getConnection().prepareStatement(query)) {
+            pstmt.setString(1, name);
+            pstmt.setString(2, department);
+            pstmt.setDouble(3, salary);
+            pstmt.setString(4, id);
+
+            int rowsAffected = pstmt.executeUpdate();
+            if (rowsAffected > 0) {
+                JOptionPane.showMessageDialog(null, "Instructor data updated successfully.");
+                displayInstructors(); // Refresh table after update
+                clearTextFields();    // Clear text fields after update
+            } else {
+                JOptionPane.showMessageDialog(null, "Failed to update instructor data.");
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error updating instructor data: " + ex.getMessage());
+            ex.printStackTrace(); // Print stack trace for debugging
+        }
     }
-    
-    
-    
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

@@ -9,10 +9,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author PCA043
- */
 public class InstructorForm extends javax.swing.JFrame {
     
     

@@ -44,7 +44,7 @@ public class DepartmentForm extends javax.swing.JFrame {
         btn_save = new javax.swing.JButton();
         btn_edit = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("DEPARTMENT");
 
         txt_search.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N

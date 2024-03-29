@@ -1,6 +1,6 @@
-package universitysystem2;
+package universitysystem;
 
-public class UniversitySystem2 {
+public class UniversitySystem {
     
     public static void main(String[] args) {
          Menu menu = new Menu();

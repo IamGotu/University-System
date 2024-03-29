@@ -1,13 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
-package universitysystem2;
+package universitysystem;
 
-/**
- *
- * @author PCA043
- */
 public class Menu extends javax.swing.JFrame {
 
     /**
@@ -114,8 +106,7 @@ public class Menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenu_departmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu_departmentActionPerformed
-
-        
+    
     }//GEN-LAST:event_jMenu_departmentActionPerformed
 
     private void jMenu_instructorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu_instructorActionPerformed

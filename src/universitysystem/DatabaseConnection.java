@@ -1,4 +1,4 @@
-package universitysystem2;
+package universitysystem;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

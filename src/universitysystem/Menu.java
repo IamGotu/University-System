@@ -37,6 +37,7 @@ public class Menu extends javax.swing.JFrame {
         jMenu_department = new javax.swing.JMenu();
         jMenu_instructor = new javax.swing.JMenu();
         jMenu_classroom = new javax.swing.JMenu();
+        jMenu_courses = new javax.swing.JMenu();
 
         jMenu3.setText("File");
         jMenuBar2.add(jMenu3);
@@ -107,6 +108,19 @@ public class Menu extends javax.swing.JFrame {
         });
         jMenuBar1.add(jMenu_classroom);
 
+        jMenu_courses.setText("COURSE");
+        jMenu_courses.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu_coursesMouseClicked(evt);
+            }
+        });
+        jMenu_courses.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu_coursesActionPerformed(evt);
+            }
+        });
+        jMenuBar1.add(jMenu_courses);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -156,6 +170,15 @@ public class Menu extends javax.swing.JFrame {
     private void jMenu_classroomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu_classroomActionPerformed
 
     }//GEN-LAST:event_jMenu_classroomActionPerformed
+
+    private void jMenu_coursesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu_coursesActionPerformed
+
+    }//GEN-LAST:event_jMenu_coursesActionPerformed
+
+    private void jMenu_coursesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu_coursesMouseClicked
+        CourseForm course = new CourseForm();
+        course.setVisible(true);
+    }//GEN-LAST:event_jMenu_coursesMouseClicked
 
     /**
      * @param args the command line arguments
@@ -208,6 +231,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar4;
     private javax.swing.JMenuBar jMenuBar5;
     private javax.swing.JMenu jMenu_classroom;
+    private javax.swing.JMenu jMenu_courses;
     private javax.swing.JMenu jMenu_department;
     private javax.swing.JMenu jMenu_instructor;
     private javax.swing.JTabbedPane jTabbedPane1;

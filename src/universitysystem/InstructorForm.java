@@ -304,9 +304,9 @@ public class InstructorForm extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "ID taken. Please use another ID.");
         } else {
             addInstructor(txt_id.getText(), 
-                    txt_name.getText(), 
-                    combo_departments.getSelectedItem().toString(), 
-                    Double.parseDouble(txt_salary.getText()));
+                          txt_name.getText(), 
+                          combo_departments.getSelectedItem().toString(), 
+                          Double.parseDouble(txt_salary.getText()));
 
             displayInstructors();
 

@@ -321,8 +321,7 @@ public class InstructorForm extends javax.swing.JFrame {
         txt_name.setText("");
         txt_salary.setText("");
         combo_departments.setSelectedIndex(0);
-        txt_search.setText("");
-        
+        txt_search.setText("");   
     }
     
     private void btn_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteActionPerformed

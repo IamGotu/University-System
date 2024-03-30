@@ -38,8 +38,9 @@ public class Menu extends javax.swing.JFrame {
         jMenu_instructor = new javax.swing.JMenu();
         jMenu_classroom = new javax.swing.JMenu();
         jMenu_courses = new javax.swing.JMenu();
-        jMenu9 = new javax.swing.JMenu();
-        jMenu10 = new javax.swing.JMenu();
+        jMenu_prerequisite = new javax.swing.JMenu();
+        jMenu_time_slot = new javax.swing.JMenu();
+        jMenu11 = new javax.swing.JMenu();
 
         jMenu3.setText("File");
         jMenuBar2.add(jMenu3);
@@ -123,31 +124,44 @@ public class Menu extends javax.swing.JFrame {
         });
         jMenuBar1.add(jMenu_courses);
 
-        jMenu9.setText("PREREQUISITES");
-        jMenu9.addMouseListener(new java.awt.event.MouseAdapter() {
+        jMenu_prerequisite.setText("PREREQUISITES");
+        jMenu_prerequisite.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jMenu9MouseClicked(evt);
+                jMenu_prerequisiteMouseClicked(evt);
             }
         });
-        jMenu9.addActionListener(new java.awt.event.ActionListener() {
+        jMenu_prerequisite.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenu9ActionPerformed(evt);
+                jMenu_prerequisiteActionPerformed(evt);
             }
         });
-        jMenuBar1.add(jMenu9);
+        jMenuBar1.add(jMenu_prerequisite);
 
-        jMenu10.setText("TIME SLOTS");
-        jMenu10.addMouseListener(new java.awt.event.MouseAdapter() {
+        jMenu_time_slot.setText("TIME SLOTS");
+        jMenu_time_slot.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jMenu10MouseClicked(evt);
+                jMenu_time_slotMouseClicked(evt);
             }
         });
-        jMenu10.addActionListener(new java.awt.event.ActionListener() {
+        jMenu_time_slot.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenu10ActionPerformed(evt);
+                jMenu_time_slotActionPerformed(evt);
             }
         });
-        jMenuBar1.add(jMenu10);
+        jMenuBar1.add(jMenu_time_slot);
+
+        jMenu11.setText("SECTIONS");
+        jMenu11.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu11MouseClicked(evt);
+            }
+        });
+        jMenu11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu11ActionPerformed(evt);
+            }
+        });
+        jMenuBar1.add(jMenu11);
 
         setJMenuBar(jMenuBar1);
 
@@ -208,23 +222,31 @@ public class Menu extends javax.swing.JFrame {
         course.setVisible(true);
     }//GEN-LAST:event_jMenu_coursesMouseClicked
 
-    private void jMenu9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu9ActionPerformed
+    private void jMenu_prerequisiteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu_prerequisiteActionPerformed
 
-    }//GEN-LAST:event_jMenu9ActionPerformed
+    }//GEN-LAST:event_jMenu_prerequisiteActionPerformed
 
-    private void jMenu9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu9MouseClicked
+    private void jMenu_prerequisiteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu_prerequisiteMouseClicked
         PrerequisiteForm prerequisite = new PrerequisiteForm();
         prerequisite.setVisible(true);
-    }//GEN-LAST:event_jMenu9MouseClicked
+    }//GEN-LAST:event_jMenu_prerequisiteMouseClicked
 
-    private void jMenu10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu10ActionPerformed
+    private void jMenu_time_slotActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu_time_slotActionPerformed
 
-    }//GEN-LAST:event_jMenu10ActionPerformed
+    }//GEN-LAST:event_jMenu_time_slotActionPerformed
 
-    private void jMenu10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu10MouseClicked
+    private void jMenu_time_slotMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu_time_slotMouseClicked
         TimeSlotForm time_slot = new TimeSlotForm();
         time_slot.setVisible(true);
-    }//GEN-LAST:event_jMenu10MouseClicked
+    }//GEN-LAST:event_jMenu_time_slotMouseClicked
+
+    private void jMenu11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu11ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenu11ActionPerformed
+
+    private void jMenu11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu11MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenu11MouseClicked
 
     /**
      * @param args the command line arguments
@@ -264,7 +286,7 @@ public class Menu extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu10;
+    private javax.swing.JMenu jMenu11;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
@@ -272,7 +294,6 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenu jMenu7;
     private javax.swing.JMenu jMenu8;
-    private javax.swing.JMenu jMenu9;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenuBar jMenuBar3;
@@ -282,6 +303,8 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu_courses;
     private javax.swing.JMenu jMenu_department;
     private javax.swing.JMenu jMenu_instructor;
+    private javax.swing.JMenu jMenu_prerequisite;
+    private javax.swing.JMenu jMenu_time_slot;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
     // End of variables declaration//GEN-END:variables

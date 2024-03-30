@@ -257,8 +257,8 @@ public class ClassroomForm extends javax.swing.JFrame {
 
     private void btn_deleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_deleteMouseClicked
         DefaultTableModel model = (DefaultTableModel) table_classrooms.getModel();
-        String id = model.getValueAt(table_classrooms.getSelectedRow(), 0).toString();
-        deleteClassroom(id);
+        String building = model.getValueAt(table_classrooms.getSelectedRow(), 0).toString();
+        deleteClassroom(building);
 
         displayClassrooms();
     }//GEN-LAST:event_btn_deleteMouseClicked

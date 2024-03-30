@@ -39,6 +39,7 @@ public class Menu extends javax.swing.JFrame {
         jMenu_classroom = new javax.swing.JMenu();
         jMenu_courses = new javax.swing.JMenu();
         jMenu9 = new javax.swing.JMenu();
+        jMenu10 = new javax.swing.JMenu();
 
         jMenu3.setText("File");
         jMenuBar2.add(jMenu3);
@@ -135,6 +136,19 @@ public class Menu extends javax.swing.JFrame {
         });
         jMenuBar1.add(jMenu9);
 
+        jMenu10.setText("TIME SLOTS");
+        jMenu10.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu10MouseClicked(evt);
+            }
+        });
+        jMenu10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu10ActionPerformed(evt);
+            }
+        });
+        jMenuBar1.add(jMenu10);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -203,6 +217,15 @@ public class Menu extends javax.swing.JFrame {
         prerequisite.setVisible(true);
     }//GEN-LAST:event_jMenu9MouseClicked
 
+    private void jMenu10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu10ActionPerformed
+
+    }//GEN-LAST:event_jMenu10ActionPerformed
+
+    private void jMenu10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu10MouseClicked
+        TimeSlotForm time_slot = new TimeSlotForm();
+        time_slot.setVisible(true);
+    }//GEN-LAST:event_jMenu10MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -241,6 +264,7 @@ public class Menu extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu10;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;

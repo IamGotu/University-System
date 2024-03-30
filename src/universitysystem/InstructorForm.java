@@ -285,7 +285,7 @@ public class InstructorForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_searchActionPerformed
 
     private void btn_searchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_searchMouseClicked
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_btn_searchMouseClicked
 
     private void btn_refreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_refreshActionPerformed
@@ -294,7 +294,7 @@ public class InstructorForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_refreshActionPerformed
 
     private void combo_departmentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo_departmentsActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_combo_departmentsActionPerformed
 
     private void btn_saveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_saveMouseClicked
@@ -351,7 +351,7 @@ public class InstructorForm extends javax.swing.JFrame {
     }//GEN-LAST:event_table_instructorsMouseClicked
 
     private void btn_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_saveActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_btn_saveActionPerformed
     
     // Display Instructor Data from Table to Text fields and Combobox.

@@ -17,6 +17,7 @@ public class DepartmentForm extends javax.swing.JFrame {
         
         // Populate the Table
         displayDepartments();
+        getBuildings();
     }
 
     /**
@@ -37,12 +38,12 @@ public class DepartmentForm extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         txt_budget = new javax.swing.JTextField();
         txt_department = new javax.swing.JTextField();
-        txt_building = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         btn_save = new javax.swing.JButton();
         btn_edit = new javax.swing.JButton();
+        combo_building = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("DEPARTMENT");
@@ -109,8 +110,6 @@ public class DepartmentForm extends javax.swing.JFrame {
 
         txt_department.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
-        txt_building.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel5.setText("BUILDING");
 
@@ -146,6 +145,8 @@ public class DepartmentForm extends javax.swing.JFrame {
             }
         });
 
+        combo_building.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -163,16 +164,16 @@ public class DepartmentForm extends javax.swing.JFrame {
                         .addComponent(jLabel7)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txt_department)
-                    .addComponent(txt_building, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txt_department, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(69, 69, 69)
                         .addComponent(btn_edit, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btn_save)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(txt_budget, javax.swing.GroupLayout.Alignment.LEADING))
+                    .addComponent(txt_budget)
+                    .addComponent(combo_building, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(86, 86, 86))
         );
         jPanel1Layout.setVerticalGroup(
@@ -184,8 +185,8 @@ public class DepartmentForm extends javax.swing.JFrame {
                     .addComponent(jLabel6))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_building, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
+                    .addComponent(jLabel5)
+                    .addComponent(combo_building, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txt_budget, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -194,7 +195,7 @@ public class DepartmentForm extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btn_save)
                     .addComponent(btn_edit, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(92, Short.MAX_VALUE))
+                .addContainerGap(87, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -277,7 +278,7 @@ public class DepartmentForm extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Department already exist. Please input another Department.");
         } else {
             addDepartment(txt_department.getText(), 
-                    txt_building.getText(), 
+                    combo_building.getSelectedItem().toString(), 
                     Double.parseDouble(txt_budget.getText()));
 
             displayDepartments();
@@ -340,6 +341,7 @@ public class DepartmentForm extends javax.swing.JFrame {
     private javax.swing.JButton btn_refresh;
     private javax.swing.JButton btn_save;
     private javax.swing.JButton btn_search;
+    private javax.swing.JComboBox<String> combo_building;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -347,7 +349,6 @@ public class DepartmentForm extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable table_departments;
     private javax.swing.JTextField txt_budget;
-    private javax.swing.JTextField txt_building;
     private javax.swing.JTextField txt_department;
     private javax.swing.JTextField txt_search;
     // End of variables declaration//GEN-END:variables
@@ -387,8 +388,15 @@ public class DepartmentForm extends javax.swing.JFrame {
         String budget = model.getValueAt(table_departments.getSelectedRow(), 2).toString();
 
         txt_department.setText(dept_name);
-        txt_building.setText(building);
-        txt_budget.setText(budget);        
+        txt_budget.setText(budget);
+
+        // for the building combo box.
+        for(int item = 0; item < combo_building.getItemCount(); item++) {
+            if(combo_building.getItemAt(item).equals(building)) {
+                combo_building.setSelectedIndex(item); // 0
+            }
+        }   
+        // end
         
     }
 
@@ -432,11 +440,12 @@ public class DepartmentForm extends javax.swing.JFrame {
 
     public void clearTextFields() {
         txt_department.setText("");
-        txt_building.setText("");
+        combo_building.setSelectedIndex(0);
         txt_budget.setText("");
         txt_search.setText("");
     }
-
+    
+    // Update department data
     private void updateDepartmentData() {
     DefaultTableModel model = (DefaultTableModel) table_departments.getModel();
     int selectedRowIndex = table_departments.getSelectedRow();
@@ -453,7 +462,7 @@ public class DepartmentForm extends javax.swing.JFrame {
     }
 
     String department = model.getValueAt(selectedRowIndex, selectedColumnIndex).toString();
-    String building = txt_building.getText();
+    String building = combo_building.getSelectedItem().toString();
     double budget = Double.parseDouble(txt_budget.getText());
 
     DatabaseConnection conn = new DatabaseConnection();
@@ -526,6 +535,22 @@ public class DepartmentForm extends javax.swing.JFrame {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error adding department: " + ex.getMessage());
             ex.printStackTrace(); // Print stack trace for debugging
+        }
+    }
+    
+    // Populate the building combobox
+    private void getBuildings() {
+        DatabaseConnection conn = new DatabaseConnection();
+        
+        String query = "SELECT DISTINCT building FROM classroom";
+        
+        try(Statement stmt = conn.getConnection().createStatement()) {
+            ResultSet rs = stmt.executeQuery(query);
+            while(rs.next()) {  
+                combo_building.addItem(rs.getString(1));
+            }
+        } catch(SQLException ex) {
+            System.out.println(ex.getMessage());
         }
     }
 }

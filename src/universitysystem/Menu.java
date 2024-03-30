@@ -241,11 +241,12 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenu_time_slotMouseClicked
 
     private void jMenu11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu11ActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_jMenu11ActionPerformed
 
     private void jMenu11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu11MouseClicked
-        // TODO add your handling code here:
+        SectionForm section = new SectionForm();
+        section.setVisible(true);
     }//GEN-LAST:event_jMenu11MouseClicked
 
     /**

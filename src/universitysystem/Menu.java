@@ -38,6 +38,7 @@ public class Menu extends javax.swing.JFrame {
         jMenu_instructor = new javax.swing.JMenu();
         jMenu_classroom = new javax.swing.JMenu();
         jMenu_courses = new javax.swing.JMenu();
+        jMenu9 = new javax.swing.JMenu();
 
         jMenu3.setText("File");
         jMenuBar2.add(jMenu3);
@@ -69,7 +70,7 @@ public class Menu extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Arial Black", 0, 36)); // NOI18N
         jLabel1.setText("ABC UNIVERSITY SYSTEM");
 
-        jMenu_department.setText("DEPARTMENT");
+        jMenu_department.setText("DEPARTMENTS");
         jMenu_department.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jMenu_departmentMouseClicked(evt);
@@ -82,7 +83,7 @@ public class Menu extends javax.swing.JFrame {
         });
         jMenuBar1.add(jMenu_department);
 
-        jMenu_instructor.setText("INSTRUCTOR");
+        jMenu_instructor.setText("INSTRUCTORS");
         jMenu_instructor.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jMenu_instructorMouseClicked(evt);
@@ -95,7 +96,7 @@ public class Menu extends javax.swing.JFrame {
         });
         jMenuBar1.add(jMenu_instructor);
 
-        jMenu_classroom.setText("CLASSROOM");
+        jMenu_classroom.setText("CLASSROOMS");
         jMenu_classroom.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jMenu_classroomMouseClicked(evt);
@@ -108,7 +109,7 @@ public class Menu extends javax.swing.JFrame {
         });
         jMenuBar1.add(jMenu_classroom);
 
-        jMenu_courses.setText("COURSE");
+        jMenu_courses.setText("COURSES");
         jMenu_courses.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jMenu_coursesMouseClicked(evt);
@@ -120,6 +121,19 @@ public class Menu extends javax.swing.JFrame {
             }
         });
         jMenuBar1.add(jMenu_courses);
+
+        jMenu9.setText("PREREQUISITES");
+        jMenu9.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu9MouseClicked(evt);
+            }
+        });
+        jMenu9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu9ActionPerformed(evt);
+            }
+        });
+        jMenuBar1.add(jMenu9);
 
         setJMenuBar(jMenuBar1);
 
@@ -180,6 +194,15 @@ public class Menu extends javax.swing.JFrame {
         course.setVisible(true);
     }//GEN-LAST:event_jMenu_coursesMouseClicked
 
+    private void jMenu9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu9ActionPerformed
+
+    }//GEN-LAST:event_jMenu9ActionPerformed
+
+    private void jMenu9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu9MouseClicked
+        PrerequisiteForm prerequisite = new PrerequisiteForm();
+        prerequisite.setVisible(true);
+    }//GEN-LAST:event_jMenu9MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -225,6 +248,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenu jMenu7;
     private javax.swing.JMenu jMenu8;
+    private javax.swing.JMenu jMenu9;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenuBar jMenuBar3;

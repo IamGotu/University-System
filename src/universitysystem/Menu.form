@@ -78,7 +78,7 @@
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="jMenu_department">
           <Properties>
-            <Property name="text" type="java.lang.String" value="DEPARTMENT"/>
+            <Property name="text" type="java.lang.String" value="DEPARTMENTS"/>
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jMenu_departmentMouseClicked"/>
@@ -87,7 +87,7 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="jMenu_instructor">
           <Properties>
-            <Property name="text" type="java.lang.String" value="INSTRUCTOR"/>
+            <Property name="text" type="java.lang.String" value="INSTRUCTORS"/>
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jMenu_instructorMouseClicked"/>
@@ -96,7 +96,7 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="jMenu_classroom">
           <Properties>
-            <Property name="text" type="java.lang.String" value="CLASSROOM"/>
+            <Property name="text" type="java.lang.String" value="CLASSROOMS"/>
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jMenu_classroomMouseClicked"/>
@@ -105,11 +105,20 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="jMenu_courses">
           <Properties>
-            <Property name="text" type="java.lang.String" value="COURSE"/>
+            <Property name="text" type="java.lang.String" value="COURSES"/>
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jMenu_coursesMouseClicked"/>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenu_coursesActionPerformed"/>
+          </Events>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="jMenu9">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="PREREQUISITES"/>
+          </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jMenu9MouseClicked"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenu9ActionPerformed"/>
           </Events>
         </Menu>
       </SubComponents>

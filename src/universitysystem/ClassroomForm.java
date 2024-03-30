@@ -355,7 +355,7 @@ public class ClassroomForm extends javax.swing.JFrame {
 
         model.setRowCount(0);
         String query = "select room_number, capacity " +
-                        " from department where building = '" + building + "'";
+                        " from classroom where building = '" + building + "'";
 
         try(Statement stmt = conn.getConnection().createStatement()) {
             ResultSet rs = stmt.executeQuery(query);
@@ -446,7 +446,7 @@ public class ClassroomForm extends javax.swing.JFrame {
     int capacity = Integer.parseInt(txt_capacity.getText());
 
     DatabaseConnection conn = new DatabaseConnection();
-    String query = "UPDATE department SET building = ?, budget = ? WHERE dept_name = ?";
+    String query = "UPDATE classroom SET room_number = ?, capacity = ? WHERE building = ?";
 
     try (PreparedStatement pstmt = conn.getConnection().prepareStatement(query)) {
         pstmt.setString(1, roomNum);
@@ -455,14 +455,14 @@ public class ClassroomForm extends javax.swing.JFrame {
 
         int rowsAffected = pstmt.executeUpdate();
         if (rowsAffected > 0) {
-            JOptionPane.showMessageDialog(null, "Department data updated successfully.");
+            JOptionPane.showMessageDialog(null, "Classroom data updated successfully.");
             displayClassrooms(); // Refresh table after update
             clearTextFields();    // Clear text fields after update
         } else {
-            JOptionPane.showMessageDialog(null, "Failed to update department data.");
+            JOptionPane.showMessageDialog(null, "Failed to update classroom data.");
         }
     } catch (SQLException ex) {
-        JOptionPane.showMessageDialog(null, "Error updating department data: " + ex.getMessage());
+        JOptionPane.showMessageDialog(null, "Error updating classroom data: " + ex.getMessage());
         ex.printStackTrace(); // Print stack trace for debugging
     }
     }
@@ -484,7 +484,7 @@ public class ClassroomForm extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Failed to add new classroom.");
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error adding department: " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error adding classroom: " + ex.getMessage());
             ex.printStackTrace(); // Print stack trace for debugging
         }
     }

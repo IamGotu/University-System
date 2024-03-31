@@ -260,8 +260,10 @@ public class ClassroomForm extends javax.swing.JFrame {
         int selectedRow = table_classrooms.getSelectedRow();
 
         if (selectedRow != -1) { // Check if a row is selected
-            String room_number = model.getValueAt(selectedRow, 0).toString();
-            deleteClassroom(room_number);
+            String building = model.getValueAt(selectedRow, 0).toString();
+            String room_number = model.getValueAt(selectedRow, 1).toString();
+            int capacity = Integer.parseInt(model.getValueAt(selectedRow, 2).toString());
+            deleteClassroom(building, room_number, capacity);
             displayClassrooms();
         } else {
             JOptionPane.showMessageDialog(null, "Please select a row to delete.");
@@ -397,23 +399,28 @@ public class ClassroomForm extends javax.swing.JFrame {
         txt_roomNum.setText(room_number);        
         txt_capacity.setText(capacity);     
     }
-
-    private void deleteClassroom(String room_number) {
+    
+    // Delete classroom
+    private void deleteClassroom(String building, String room_number, int capacity) {
         DatabaseConnection conn = new DatabaseConnection();
-        String query = "DELETE FROM classroom WHERE room_number = ?";
+        String query = "DELETE FROM classroom WHERE building = ? AND room_number = ? AND capacity = ?";
 
         try (PreparedStatement pstmt = conn.getConnection().prepareStatement(query)) {
-            pstmt.setString(1, room_number);
-            int rowsDeleted = pstmt.executeUpdate();
-            if (rowsDeleted > 1) {
-                JOptionPane.showMessageDialog(null, "Successfully deleted a record.");
+            pstmt.setString(1, building);
+            pstmt.setString(2, room_number);
+            pstmt.setInt(3, capacity);
+            int rowsDeleted = pstmt.executeUpdate(); // Execute the query and get the number of rows affected
+            if (rowsDeleted > 0) {
+                JOptionPane.showMessageDialog(null, "Successfully deleted the record for " + building + ", room " + room_number);
             } else {
-                JOptionPane.showMessageDialog(null, "No record found for deletion.");
+                JOptionPane.showMessageDialog(null, "No records found for " + building + ", room " + room_number);
             }
         } catch (SQLException ex) {
-            ex.printStackTrace(); // Print the exception stack trace for debugging
+            System.out.println(ex.getMessage());
         }
     }
+
+
     
     // Display all classrooms data to the table
     private void displayClassrooms() {

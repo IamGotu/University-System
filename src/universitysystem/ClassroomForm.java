@@ -280,11 +280,7 @@ public class ClassroomForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_refreshActionPerformed
 
     private void btn_saveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_saveMouseClicked
-        
-        // check room number duplicates before adding new Classroom
-        if(checkRoomNum(txt_roomNum.getText())) {
-            JOptionPane.showMessageDialog(null, "Room number is occuppied. Please input another room number.");
-        } else {
+
             addClassroom(txt_building.getText(), 
                          txt_roomNum.getText(),                            
                          Integer.parseInt(txt_capacity.getText()));
@@ -292,7 +288,6 @@ public class ClassroomForm extends javax.swing.JFrame {
             displayClassrooms();
 
             clearTextFields(); // Clear text fields
-        }
     }//GEN-LAST:event_btn_saveMouseClicked
 
     private void btn_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_saveActionPerformed

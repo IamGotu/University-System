@@ -378,7 +378,7 @@ public class InstructorForm extends javax.swing.JFrame {
     }
     
     // Check ID duplicates.
-    public Boolean checkId(String id) {
+    public boolean checkId(String id) {
         DatabaseConnection conn = new DatabaseConnection();
 
         String query = "select id, dept_name, salary " +

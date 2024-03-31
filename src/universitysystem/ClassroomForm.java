@@ -257,10 +257,15 @@ public class ClassroomForm extends javax.swing.JFrame {
 
     private void btn_deleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_deleteMouseClicked
         DefaultTableModel model = (DefaultTableModel) table_classrooms.getModel();
-        String building = model.getValueAt(table_classrooms.getSelectedRow(), 0).toString();
-        deleteClassroom(building);
+        int selectedRow = table_classrooms.getSelectedRow();
 
-        displayClassrooms();
+        if (selectedRow != -1) { // Check if a row is selected
+            String room_number = model.getValueAt(selectedRow, 0).toString();
+            deleteClassroom(room_number);
+            displayClassrooms();
+        } else {
+            JOptionPane.showMessageDialog(null, "Please select a row to delete.");
+        }
     }//GEN-LAST:event_btn_deleteMouseClicked
 
     private void btn_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteActionPerformed
@@ -273,13 +278,19 @@ public class ClassroomForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_refreshActionPerformed
 
     private void btn_saveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_saveMouseClicked
-            addClassroom(txt_building.getText(),
-                        txt_roomNum.getText(),
-                        Integer.parseInt(txt_capacity.getText()));
-            
+        
+        // check room number duplicates before adding new Classroom
+        if(checkRoomNum(txt_roomNum.getText())) {
+            JOptionPane.showMessageDialog(null, "Room number is occuppied. Please input another room number.");
+        } else {
+            addClassroom(txt_building.getText(), 
+                         txt_roomNum.getText(),                            
+                         Integer.parseInt(txt_capacity.getText()));
+      
             displayClassrooms();
 
             clearTextFields(); // Clear text fields
+        }
     }//GEN-LAST:event_btn_saveMouseClicked
 
     private void btn_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_saveActionPerformed
@@ -387,17 +398,20 @@ public class ClassroomForm extends javax.swing.JFrame {
         txt_capacity.setText(capacity);     
     }
 
-    private void deleteClassroom(String building) {
+    private void deleteClassroom(String room_number) {
         DatabaseConnection conn = new DatabaseConnection();
-        String query = "DELETE FROM classroom WHERE building = ?";
-        
-        try(PreparedStatement pstmt = conn.getConnection().prepareStatement(query)) {
-            pstmt.setString(1, building);
-            if(pstmt.executeUpdate() > 0) {
+        String query = "DELETE FROM classroom WHERE room_number = ?";
+
+        try (PreparedStatement pstmt = conn.getConnection().prepareStatement(query)) {
+            pstmt.setString(1, room_number);
+            int rowsDeleted = pstmt.executeUpdate();
+            if (rowsDeleted > 1) {
                 JOptionPane.showMessageDialog(null, "Successfully deleted a record.");
+            } else {
+                JOptionPane.showMessageDialog(null, "No record found for deletion.");
             }
-        } catch(SQLException ex){
-            System.out.println(ex.getMessage());
+        } catch (SQLException ex) {
+            ex.printStackTrace(); // Print the exception stack trace for debugging
         }
     }
     
@@ -442,14 +456,14 @@ public class ClassroomForm extends javax.swing.JFrame {
     }
 
     String building = model.getValueAt(selectedRowIndex, 0).toString();
-    String roomNum = txt_roomNum.getText();
+    String room_number = txt_roomNum.getText();
     int capacity = Integer.parseInt(txt_capacity.getText());
 
     DatabaseConnection conn = new DatabaseConnection();
     String query = "UPDATE classroom SET room_number = ?, capacity = ? WHERE building = ?";
 
     try (PreparedStatement pstmt = conn.getConnection().prepareStatement(query)) {
-        pstmt.setString(1, roomNum);
+        pstmt.setString(1, room_number);
         pstmt.setDouble(2, capacity);
         pstmt.setString(3, building);
 
@@ -487,5 +501,31 @@ public class ClassroomForm extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Error adding classroom: " + ex.getMessage());
             ex.printStackTrace(); // Print stack trace for debugging
         }
+    }
+    
+    // Check room number duplicates.
+    public boolean checkRoomNum(String room_number) {
+        DatabaseConnection conn = new DatabaseConnection();
+
+        String query = "select building, budget " +
+                        " from classroom where room_number = '" + room_number + "'";
+
+        try(Statement stmt = conn.getConnection().createStatement()) {
+            ResultSet rs = stmt.executeQuery(query);
+             
+            int count = 0;
+            while(rs.next()) {
+                count ++;
+            }
+            
+            if (count > 0){
+                // room number occuppied
+                return true;
+            }                       
+        } catch(SQLException ex) {
+            //
+        }
+        // room number is available
+        return false;
     }
 }

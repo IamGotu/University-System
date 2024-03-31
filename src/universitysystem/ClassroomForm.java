@@ -411,9 +411,9 @@ public class ClassroomForm extends javax.swing.JFrame {
             pstmt.setInt(3, capacity);
             int rowsDeleted = pstmt.executeUpdate(); // Execute the query and get the number of rows affected
             if (rowsDeleted > 0) {
-                JOptionPane.showMessageDialog(null, "Successfully deleted the record for " + building + ", room " + room_number);
+                JOptionPane.showMessageDialog(null, "Successfully deleted the record");
             } else {
-                JOptionPane.showMessageDialog(null, "No records found for " + building + ", room " + room_number);
+                JOptionPane.showMessageDialog(null, "No records found");
             }
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());

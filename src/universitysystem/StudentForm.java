@@ -327,7 +327,20 @@ public class StudentForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_editMouseClicked
 
     private void btn_editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editActionPerformed
-        updateStudentData();
+        DefaultTableModel model = (DefaultTableModel) table_students.getModel();
+        int selectedRow = table_students.getSelectedRow();
+
+        if (selectedRow != -1) { // Check if a row is selected
+        String id = model.getValueAt(selectedRow, 0).toString();
+        String name = txt_name.getText();
+        String department = combo_departments.getSelectedItem().toString();
+        int tot_cred = Integer.parseInt(txt_tot_cred.getText());
+        updateStudentData(id, name, department, tot_cred);
+            displayStudents();
+            clearTextFields();
+        } else {
+            JOptionPane.showMessageDialog(null, "Please select a row to edit.");
+        }
     }//GEN-LAST:event_btn_editActionPerformed
 
     private void btn_refreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_refreshActionPerformed
@@ -503,34 +516,19 @@ public class StudentForm extends javax.swing.JFrame {
     }
     
     // Update student data
-    private void updateStudentData() {
-        DefaultTableModel model = (DefaultTableModel) table_students.getModel();
-        int selectedRowIndex = table_students.getSelectedRow();
-
-        if (selectedRowIndex == -1) {
-            JOptionPane.showMessageDialog(null, "Please select a row to edit.");
-            return;
-        }
-
-        String id = model.getValueAt(selectedRowIndex, 0).toString();
-        String name = txt_name.getText();
-        String department = combo_departments.getSelectedItem().toString();
-        int tot_cred = Integer.parseInt(txt_tot_cred.getText());
-
+    private void updateStudentData(String id, String name, String department, int tot_cred) {        
         DatabaseConnection conn = new DatabaseConnection();
         String query = "UPDATE student SET name = ?, dept_name = ?, tot_cred = ? WHERE id = ?";
 
         try (PreparedStatement pstmt = conn.getConnection().prepareStatement(query)) {
             pstmt.setString(1, name);
             pstmt.setString(2, department);
-            pstmt.setDouble(3, tot_cred);
+            pstmt.setInt(3, tot_cred);
             pstmt.setString(4, id);
 
             int rowsAffected = pstmt.executeUpdate();
             if (rowsAffected > 0) {
                 JOptionPane.showMessageDialog(null, "Student data updated successfully.");
-                displayStudents();  // Refresh table after update
-                clearTextFields();  // Clear text fields after update
             } else {
                 JOptionPane.showMessageDialog(null, "Failed to update student data.");
             }

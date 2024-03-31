@@ -288,7 +288,18 @@ public class PrerequisiteForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_editMouseClicked
 
     private void btn_editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editActionPerformed
-        updatePrereqData();
+        DefaultTableModel model = (DefaultTableModel) table_prereqs.getModel();
+        int selectedRow = table_prereqs.getSelectedRow();
+
+        if (selectedRow != -1) { // Check if a row is selected
+        String course_id = model.getValueAt(selectedRow, 0).toString();
+        String prereq_id = combo_prereq_id.getSelectedItem().toString();
+        updatePrereqData(course_id, prereq_id);
+            displayPrereqs();
+            clearTextFields();
+        } else {
+            JOptionPane.showMessageDialog(null, "Please select a row to edit.");
+        }
     }//GEN-LAST:event_btn_editActionPerformed
 
     private void combo_course_idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo_course_idActionPerformed
@@ -503,18 +514,7 @@ public class PrerequisiteForm extends javax.swing.JFrame {
     }
     
     // Update prerequisite data
-    private void updatePrereqData() {
-        DefaultTableModel model = (DefaultTableModel) table_prereqs.getModel();
-        int selectedRowIndex = table_prereqs.getSelectedRow();
-
-        if (selectedRowIndex == -1) {
-            JOptionPane.showMessageDialog(null, "Please select a row to edit.");
-            return;
-        }
-
-        String course_id = model.getValueAt(selectedRowIndex, 0).toString();
-        String prereq_id = combo_prereq_id.getSelectedItem().toString();
-
+    private void updatePrereqData(String course_id, String prereq_id) {        
         DatabaseConnection conn = new DatabaseConnection();
         String query = "UPDATE prereq SET prereq_id = ? WHERE course_id = ?";
 
@@ -524,9 +524,7 @@ public class PrerequisiteForm extends javax.swing.JFrame {
 
             int rowsAffected = pstmt.executeUpdate();
             if (rowsAffected > 0) {
-                JOptionPane.showMessageDialog(null, "Prerequisite data updated successfully.");
-                displayPrereqs();   // Refresh table after update
-                clearTextFields();  // Clear text fields after update
+                JOptionPane.showMessageDialog(null, "Prerequisite data updated successfully.");                
             } else {
                 JOptionPane.showMessageDialog(null, "Failed to update prerequisite data.");
             }

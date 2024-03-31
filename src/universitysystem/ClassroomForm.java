@@ -299,7 +299,19 @@ public class ClassroomForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_editMouseClicked
 
     private void btn_editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editActionPerformed
-        updateClassroomData();
+        DefaultTableModel model = (DefaultTableModel) table_classrooms.getModel();
+        int selectedRow = table_classrooms.getSelectedRow();
+
+        if (selectedRow != -1) { // Check if a row is selected
+        String building = model.getValueAt(selectedRow, 0).toString();
+        String room_number = txt_roomNum.getText();
+        int capacity = Integer.parseInt(txt_capacity.getText());
+        updateClassroomData(building, room_number, capacity);
+            displayClassrooms();
+            clearTextFields();
+        } else {
+            JOptionPane.showMessageDialog(null, "Please select a row to edit.");
+        }
     }//GEN-LAST:event_btn_editActionPerformed
 
     /**
@@ -448,39 +460,25 @@ public class ClassroomForm extends javax.swing.JFrame {
         txt_search.setText("");
     }
 
-    private void updateClassroomData() {
-        DefaultTableModel model = (DefaultTableModel) table_classrooms.getModel();
-    int selectedRowIndex = table_classrooms.getSelectedRow();
+    private void updateClassroomData(String building, String room_number, int capacity) {
+        DatabaseConnection conn = new DatabaseConnection();
+        String query = "UPDATE classroom SET room_number = ?, capacity = ? WHERE building = ?";
 
-    if (selectedRowIndex == -1) {
-        JOptionPane.showMessageDialog(null, "Please select a row to edit.");
-        return;
-    }
+        try (PreparedStatement pstmt = conn.getConnection().prepareStatement(query)) {
+            pstmt.setString(1, room_number);
+            pstmt.setDouble(2, capacity);
+            pstmt.setString(3, building);
 
-    String building = model.getValueAt(selectedRowIndex, 0).toString();
-    String room_number = txt_roomNum.getText();
-    int capacity = Integer.parseInt(txt_capacity.getText());
-
-    DatabaseConnection conn = new DatabaseConnection();
-    String query = "UPDATE classroom SET room_number = ?, capacity = ? WHERE building = ?";
-
-    try (PreparedStatement pstmt = conn.getConnection().prepareStatement(query)) {
-        pstmt.setString(1, room_number);
-        pstmt.setDouble(2, capacity);
-        pstmt.setString(3, building);
-
-        int rowsAffected = pstmt.executeUpdate();
-        if (rowsAffected > 0) {
-            JOptionPane.showMessageDialog(null, "Classroom data updated successfully.");
-            displayClassrooms(); // Refresh table after update
-            clearTextFields();    // Clear text fields after update
-        } else {
-            JOptionPane.showMessageDialog(null, "Failed to update classroom data.");
+            int rowsAffected = pstmt.executeUpdate();
+            if (rowsAffected > 0) {
+                JOptionPane.showMessageDialog(null, "Classroom data updated successfully.");
+            } else {
+                JOptionPane.showMessageDialog(null, "Failed to update classroom data.");
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error updating classroom data: " + ex.getMessage());
+            ex.printStackTrace(); // Print stack trace for debugging
         }
-    } catch (SQLException ex) {
-        JOptionPane.showMessageDialog(null, "Error updating classroom data: " + ex.getMessage());
-        ex.printStackTrace(); // Print stack trace for debugging
-    }
     }
     
     // Add a new Classroom

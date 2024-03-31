@@ -331,7 +331,20 @@ public class CourseForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_editMouseClicked
 
     private void btn_editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editActionPerformed
-        updateCourseData();
+        DefaultTableModel model = (DefaultTableModel) table_courses.getModel();
+        int selectedRow = table_courses.getSelectedRow();
+
+        if (selectedRow != -1) { // Check if a row is selected
+            String course_id = model.getValueAt(selectedRow, 0).toString();
+            String title = txt_title.getText();
+            String department = combo_departments.getSelectedItem().toString();
+            int credits = Integer.parseInt(txt_credits.getText());
+            updateCourseData(course_id, title, department, credits);
+            displayCourses();
+            clearTextFields();
+        } else {
+            JOptionPane.showMessageDialog(null, "Please select a row to edit.");
+        }
     }//GEN-LAST:event_btn_editActionPerformed
 
     /**
@@ -563,20 +576,10 @@ public class CourseForm extends javax.swing.JFrame {
     }
     
     // Update course data
-    private void updateCourseData() {
-        DefaultTableModel model = (DefaultTableModel) table_courses.getModel();
-        int selectedRowIndex = table_courses.getSelectedRow();
-
-        if (selectedRowIndex == -1) {
-            JOptionPane.showMessageDialog(null, "Please select a row to edit.");
-            return;
-        }
-
-        String course_id = model.getValueAt(selectedRowIndex, 0).toString();
-        String title = txt_title.getText();
-        String department = combo_departments.getSelectedItem().toString();
-        int credits = Integer.parseInt(txt_credits.getText());
-
+    private void updateCourseData(String course_id,
+                                    String title,
+                                    String department,
+                                    int credits) {        
         DatabaseConnection conn = new DatabaseConnection();
         String query = "UPDATE course SET title = ?, dept_name = ?, credits = ? WHERE course_id = ?";
 
@@ -589,8 +592,6 @@ public class CourseForm extends javax.swing.JFrame {
             int rowsAffected = pstmt.executeUpdate();
             if (rowsAffected > 0) {
                 JOptionPane.showMessageDialog(null, "Course data updated successfully.");
-                displayCourses(); // Refresh table after update
-                clearTextFields();    // Clear text fields after update
             } else {
                 JOptionPane.showMessageDialog(null, "Failed to update course data.");
             }

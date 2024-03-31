@@ -349,7 +349,21 @@ public class InstructorForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_editMouseClicked
 
     private void btn_editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editActionPerformed
-        updateInstructorData();
+        DefaultTableModel model = (DefaultTableModel) table_instructors.getModel();
+        int selectedRow = table_instructors.getSelectedRow();
+
+        if (selectedRow != -1) { // Check if a row is selected
+            String id = model.getValueAt(selectedRow, 0).toString();
+            String name = txt_name.getText();
+            String department = combo_departments.getSelectedItem().toString();
+            double salary = Double.parseDouble(txt_salary.getText());
+            updateInstructorData(id, name, department, salary);
+            displayInstructors();
+            clearTextFields();
+        } else {
+            JOptionPane.showMessageDialog(null, "Please select a row to edit.");
+        }
+        //updateInstructorData();
     }//GEN-LAST:event_btn_editActionPerformed
 
     private void table_instructorsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table_instructorsMouseClicked
@@ -531,20 +545,7 @@ public class InstructorForm extends javax.swing.JFrame {
     } 
     
     // Update instructor data
-    private void updateInstructorData() {
-        DefaultTableModel model = (DefaultTableModel) table_instructors.getModel();
-        int selectedRowIndex = table_instructors.getSelectedRow();
-
-        if (selectedRowIndex == -1) {
-            JOptionPane.showMessageDialog(null, "Please select a row to edit.");
-            return;
-        }
-
-        String id = model.getValueAt(selectedRowIndex, 0).toString();
-        String name = txt_name.getText();
-        String department = combo_departments.getSelectedItem().toString();
-        double salary = Double.parseDouble(txt_salary.getText());
-
+    private void updateInstructorData(String id, String name, String department, double salary) {
         DatabaseConnection conn = new DatabaseConnection();
         String query = "UPDATE instructor SET name = ?, dept_name = ?, salary = ? WHERE id = ?";
 
@@ -557,8 +558,6 @@ public class InstructorForm extends javax.swing.JFrame {
             int rowsAffected = pstmt.executeUpdate();
             if (rowsAffected > 0) {
                 JOptionPane.showMessageDialog(null, "Instructor data updated successfully.");
-                displayInstructors(); // Refresh table after update
-                clearTextFields();    // Clear text fields after update
             } else {
                 JOptionPane.showMessageDialog(null, "Failed to update instructor data.");
             }
@@ -567,6 +566,7 @@ public class InstructorForm extends javax.swing.JFrame {
             ex.printStackTrace(); // Print stack trace for debugging
         }
     }
+
     
     /**
      * @param args the command line arguments

@@ -335,7 +335,22 @@ public class TimeSlotForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_editMouseClicked
 
     private void btn_editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editActionPerformed
-        updateTimeSlotData();
+        DefaultTableModel model = (DefaultTableModel) table_time_slots.getModel();
+        int selectedRow = table_time_slots.getSelectedRow();
+
+        if (selectedRow != -1) { // Check if a row is selected
+        String time_slot_id = model.getValueAt(selectedRow, 0).toString();
+        String day = txt_day.getText();
+        int start_hr = Integer.parseInt(txt_start_hr.getText());
+        int start_min = Integer.parseInt(txt_start_min.getText());
+        int end_hr = Integer.parseInt(txt_end_hr.getText());
+        int end_min = Integer.parseInt(txt_end_min.getText());
+        updateTimeSlotData(time_slot_id, day, start_hr, start_min, end_hr, end_min);
+            displayTimeSlots();
+            clearTextFields();
+        } else {
+            JOptionPane.showMessageDialog(null, "Please select a row to edit.");
+        }
     }//GEN-LAST:event_btn_editActionPerformed
 
     private void btn_searchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_searchMouseClicked
@@ -512,46 +527,31 @@ public class TimeSlotForm extends javax.swing.JFrame {
             ex.printStackTrace(); // Print stack trace for debugging
         }
     }
+    
+    // Update instructor data
+    private void updateTimeSlotData(String time_slot_id, String day, int start_hr,
+                                    int start_min, int end_hr, int end_min) {        
+        DatabaseConnection conn = new DatabaseConnection();
+        String query = "UPDATE time_slot SET day = ?, start_hr = ?, start_min = ?, end_hr = ?, end_min = ? WHERE time_slot_id = ?";
 
-    private void updateTimeSlotData() {
-        DefaultTableModel model = (DefaultTableModel) table_time_slots.getModel();
-    int selectedRowIndex = table_time_slots.getSelectedRow();
+        try (PreparedStatement pstmt = conn.getConnection().prepareStatement(query)) {
+            pstmt.setString(1, day);
+            pstmt.setInt(2, start_hr);
+            pstmt.setInt(3, start_min);
+            pstmt.setInt(4, end_hr);
+            pstmt.setInt(5, end_min);
+            pstmt.setString(6, time_slot_id);
 
-    if (selectedRowIndex == -1) {
-        JOptionPane.showMessageDialog(null, "Please select a row to edit.");
-        return;
-    }
-
-    String time_slot_id = model.getValueAt(selectedRowIndex, 0).toString();
-    String day = txt_day.getText();
-    int start_hr = Integer.parseInt(txt_start_hr.getText());
-    int start_min = Integer.parseInt(txt_start_min.getText());
-    int end_hr = Integer.parseInt(txt_end_hr.getText());
-    int end_min = Integer.parseInt(txt_end_min.getText());
-
-    DatabaseConnection conn = new DatabaseConnection();
-    String query = "UPDATE time_slot SET day = ?, start_hr = ?, start_min = ?, end_hr = ?, end_min = ? WHERE time_slot_id = ?";
-
-    try (PreparedStatement pstmt = conn.getConnection().prepareStatement(query)) {
-        pstmt.setString(1, day);
-        pstmt.setInt(2, start_hr);
-        pstmt.setInt(3, start_min);
-        pstmt.setInt(4, end_hr);
-        pstmt.setInt(5, end_min);
-        pstmt.setString(6, time_slot_id);
-
-        int rowsAffected = pstmt.executeUpdate();
-        if (rowsAffected > 0) {
-            JOptionPane.showMessageDialog(null, "Time slot data updated successfully.");
-            displayTimeSlots(); // Refresh table after update
-            clearTextFields();    // Clear text fields after update
-        } else {
-            JOptionPane.showMessageDialog(null, "Failed to update time slot data.");
+            int rowsAffected = pstmt.executeUpdate();
+            if (rowsAffected > 0) {
+                JOptionPane.showMessageDialog(null, "Time slot data updated successfully.");               
+            } else {
+                JOptionPane.showMessageDialog(null, "Failed to update time slot data.");
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error updating time slot data: " + ex.getMessage());
+            ex.printStackTrace(); // Print stack trace for debugging
         }
-    } catch (SQLException ex) {
-        JOptionPane.showMessageDialog(null, "Error updating time slot data: " + ex.getMessage());
-        ex.printStackTrace(); // Print stack trace for debugging
-    }
     }
     
     // Search time slot using Search Text field and display.

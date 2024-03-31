@@ -19,6 +19,7 @@ public class SectionForm extends javax.swing.JFrame {
         displaySections();
         getCourseID();
         getBuilding();
+        getRoomNum();
         getTimeSlot();      
     }
 
@@ -38,7 +39,6 @@ public class SectionForm extends javax.swing.JFrame {
         btn_delete = new javax.swing.JButton();
         btn_refresh = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        txt_room_number = new javax.swing.JTextField();
         txt_year = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -54,6 +54,7 @@ public class SectionForm extends javax.swing.JFrame {
         combo_departments = new javax.swing.JComboBox<>();
         combo_building = new javax.swing.JComboBox<>();
         combo_time_slot_id = new javax.swing.JComboBox<>();
+        combo_room_number = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("SECTION");
@@ -115,8 +116,6 @@ public class SectionForm extends javax.swing.JFrame {
         });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("ADD NEW SECTION"));
-
-        txt_room_number.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
         txt_year.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
@@ -192,6 +191,13 @@ public class SectionForm extends javax.swing.JFrame {
             }
         });
 
+        combo_room_number.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        combo_room_number.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                combo_room_numberActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -214,7 +220,6 @@ public class SectionForm extends javax.swing.JFrame {
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addComponent(txt_semester, javax.swing.GroupLayout.Alignment.TRAILING)
                                         .addComponent(txt_section_id, javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(txt_room_number)
                                         .addComponent(combo_departments, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(combo_time_slot_id, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -230,13 +235,14 @@ public class SectionForm extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txt_year, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(combo_building, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                    .addComponent(combo_building, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(combo_room_number, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(19, Short.MAX_VALUE)
+                .addContainerGap(20, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(combo_departments, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -256,10 +262,10 @@ public class SectionForm extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(combo_building, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 17, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 20, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_room_number, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8))
+                    .addComponent(jLabel8)
+                    .addComponent(combo_room_number, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
@@ -360,7 +366,7 @@ public class SectionForm extends javax.swing.JFrame {
                     txt_semester.getText(),
                     Integer.parseInt(txt_year.getText()),
                     combo_building.getSelectedItem().toString(),
-                    txt_room_number.getText(),
+                    combo_room_number.getSelectedItem().toString(),
                     combo_time_slot_id.getSelectedItem().toString());
 
         displaySections();
@@ -377,7 +383,23 @@ public class SectionForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_editMouseClicked
 
     private void btn_editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editActionPerformed
-        updateSectionData();
+        DefaultTableModel model = (DefaultTableModel) table_section.getModel();
+        int selectedRow = table_section.getSelectedRow();
+
+        if (selectedRow != -1) { // Check if a row is selected
+        String course_id = model.getValueAt(selectedRow, 0).toString();
+        String sec_id = txt_section_id.getText();
+        String semester = txt_semester.getText();
+        int year = Integer.parseInt(txt_year.getText());
+        String building = combo_building.getSelectedItem().toString();
+        String room_number = combo_room_number.getSelectedItem().toString();
+        String time_slot_id = combo_time_slot_id.getSelectedItem().toString();
+        updateSectionData(course_id, sec_id, semester, year, building, room_number, time_slot_id);
+            displaySections();
+            clearTextFields();
+        } else {
+            JOptionPane.showMessageDialog(null, "Please select a row to edit.");
+        }
     }//GEN-LAST:event_btn_editActionPerformed
 
     private void combo_departmentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo_departmentsActionPerformed
@@ -391,6 +413,10 @@ public class SectionForm extends javax.swing.JFrame {
     private void combo_time_slot_idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo_time_slot_idActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_combo_time_slot_idActionPerformed
+
+    private void combo_room_numberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo_room_numberActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_combo_room_numberActionPerformed
 
     /**
      * @param args the command line arguments
@@ -435,6 +461,7 @@ public class SectionForm extends javax.swing.JFrame {
     private javax.swing.JButton btn_search;
     private javax.swing.JComboBox<String> combo_building;
     private javax.swing.JComboBox<String> combo_departments;
+    private javax.swing.JComboBox<String> combo_room_number;
     private javax.swing.JComboBox<String> combo_time_slot_id;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -446,14 +473,13 @@ public class SectionForm extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable table_section;
-    private javax.swing.JTextField txt_room_number;
     private javax.swing.JTextField txt_search;
     private javax.swing.JTextField txt_section_id;
     private javax.swing.JTextField txt_semester;
     private javax.swing.JTextField txt_year;
     // End of variables declaration//GEN-END:variables
     
-    // Display all instructor data to the table
+    // Display all section data to the table
     private void displaySections() {
         DatabaseConnection conn = new DatabaseConnection();
         DefaultTableModel model = (DefaultTableModel) table_section.getModel();
@@ -514,6 +540,22 @@ public class SectionForm extends javax.swing.JFrame {
         }
     }
     
+    // Populate the room number combobox
+    private void getRoomNum() {
+        DatabaseConnection conn = new DatabaseConnection();
+        
+        String query = "SELECT DISTINCT room_number FROM classroom";
+        
+        try(Statement stmt = conn.getConnection().createStatement()) {
+            ResultSet rs = stmt.executeQuery(query);
+            while(rs.next()) {  
+                combo_room_number.addItem(rs.getString(1));
+            }
+        } catch(SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+    
     // Populate the time slot id combobox
     private void getTimeSlot() {
         DatabaseConnection conn = new DatabaseConnection();
@@ -560,7 +602,7 @@ public class SectionForm extends javax.swing.JFrame {
         }
     }
     
-    // Display Instructor Data from Table to Text fields and Combobox.
+    // Display Section Data from Table to Text fields and Combobox.
     private void getSectionData() {
         DefaultTableModel model = (DefaultTableModel) table_section.getModel();
         
@@ -575,7 +617,8 @@ public class SectionForm extends javax.swing.JFrame {
         txt_section_id.setText(sec_id);
         txt_semester.setText(semester);
         txt_year.setText(year);
-        txt_room_number.setText(room_number);
+        
+        
         
         
         // for the course id combo box.
@@ -590,6 +633,14 @@ public class SectionForm extends javax.swing.JFrame {
         for(int item = 0; item < combo_building.getItemCount(); item++) {
             if(combo_building.getItemAt(item).equals(building)) {
                 combo_building.setSelectedIndex(item); // 0
+            }
+        }   
+        // end
+        
+        // for the building combo box.
+        for(int item = 0; item < combo_room_number.getItemCount(); item++) {
+            if(combo_room_number.getItemAt(item).equals(room_number)) {
+                combo_room_number.setSelectedIndex(item); // 0
             }
         }   
         // end
@@ -635,51 +686,38 @@ public class SectionForm extends javax.swing.JFrame {
         txt_semester.setText("");
         txt_year.setText("");
         combo_building.setSelectedIndex(0);
-        txt_room_number.setText("");
+        combo_room_number.setSelectedIndex(0);
         combo_time_slot_id.setSelectedIndex(0);
         txt_search.setText("");   
     }
     
     // Update section data
-    private void updateSectionData() {
-        DefaultTableModel model = (DefaultTableModel) table_section.getModel();
-        int selectedRowIndex = table_section.getSelectedRow();
-
-        if (selectedRowIndex == -1) {
-            JOptionPane.showMessageDialog(null, "Please select a row to edit.");
-            return;
-        }
-
-        String course_id = model.getValueAt(selectedRowIndex, 0).toString();
-        String sec_id = txt_section_id.getText();
-        String semester = txt_semester.getText();
-        int year = Integer.parseInt(txt_year.getText());
-        String building = combo_building.getSelectedItem().toString();
-        String room_number = txt_room_number.getText();
-        String time_slot_id = combo_time_slot_id.getSelectedItem().toString();
-
+    private void updateSectionData(String course_id, String sec_id, String semester, int year,
+                                   String building, String room_number, String time_slot_id) {        
         DatabaseConnection conn = new DatabaseConnection();
-        String query = "UPDATE section SET sec_id = ?, semester = ?, year = ?, building = ?, room_number, time_slot_id WHERE course_id = ?";
+        String query = "UPDATE section SET sec_id = ?, semester = ?, year = ?, building = ?, room_number = ?, time_slot_id = ? WHERE course_id = ?";
+
+
+        //String query = "UPDATE section SET sec_id = ?, semester = ?, year = ?, building = ?, room_number, time_slot_id WHERE course_id = ?";
 
         try (PreparedStatement pstmt = conn.getConnection().prepareStatement(query)) {
-            pstmt.setString(1, course_id);
-            pstmt.setString(2, sec_id);
-            pstmt.setString(3, semester);
-            pstmt.setInt(4, year);
-            pstmt.setString(5, building);
-            pstmt.setString(6, room_number);
-            pstmt.setString(7, time_slot_id);
+            
+            pstmt.setString(1, sec_id);
+            pstmt.setString(2, semester);
+            pstmt.setInt(3, year);
+            pstmt.setString(4, building);
+            pstmt.setString(5, room_number);
+            pstmt.setString(6, time_slot_id);
+            pstmt.setString(7, course_id);
 
             int rowsAffected = pstmt.executeUpdate();
             if (rowsAffected > 0) {
-                JOptionPane.showMessageDialog(null, "Instructor data updated successfully.");
-                displaySections(); // Refresh table after update
-                clearTextFields();    // Clear text fields after update
+                JOptionPane.showMessageDialog(null, "Section data updated successfully.");                
             } else {
-                JOptionPane.showMessageDialog(null, "Failed to update instructor data.");
+                JOptionPane.showMessageDialog(null, "Failed to update section data.");
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error updating instructor data: " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error updating section data: " + ex.getMessage());
             ex.printStackTrace(); // Print stack trace for debugging
         }
     }

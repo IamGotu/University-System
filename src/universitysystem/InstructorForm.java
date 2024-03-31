@@ -363,7 +363,6 @@ public class InstructorForm extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Please select a row to edit.");
         }
-        //updateInstructorData();
     }//GEN-LAST:event_btn_editActionPerformed
 
     private void table_instructorsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table_instructorsMouseClicked

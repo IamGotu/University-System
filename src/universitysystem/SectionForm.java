@@ -328,10 +328,21 @@ public class SectionForm extends javax.swing.JFrame {
 
     private void btn_deleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_deleteMouseClicked
         DefaultTableModel model = (DefaultTableModel) table_section.getModel();
-        String section_id = model.getValueAt(table_section.getSelectedRow(), 0).toString();
-        deleteSections(section_id);
+        int selectedRow = table_section.getSelectedRow();
 
-        displaySections();
+        if (selectedRow != -1) { // Check if a row is selected
+            String course_id = model.getValueAt(selectedRow, 0).toString();
+            String sec_id = model.getValueAt(selectedRow, 1).toString();
+            String semester = model.getValueAt(selectedRow, 2).toString();
+            int year = Integer.parseInt(model.getValueAt(selectedRow, 3).toString());
+            String building = model.getValueAt(selectedRow, 4).toString();
+            String room_number = model.getValueAt(selectedRow, 5).toString();
+            String time_slot_id = model.getValueAt(selectedRow, 6).toString();
+            deleteSections(course_id, sec_id, semester, year, building, room_number, time_slot_id);
+            displaySections();
+        } else {
+            JOptionPane.showMessageDialog(null, "Please select a row to delete.");
+        }
     }//GEN-LAST:event_btn_deleteMouseClicked
 
     private void btn_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteActionPerformed
@@ -594,16 +605,26 @@ public class SectionForm extends javax.swing.JFrame {
     }
     
     // Delete section
-    private void deleteSections(String sec_id) {
+    private void deleteSections(String course_id, String sec_id, String semester, int year,
+                                String building, String room_number, String time_slot_id) {
         DatabaseConnection conn = new DatabaseConnection();
-        String query = "DELETE FROM section WHERE sec_id = ?";
-        
-        try(PreparedStatement pstmt = conn.getConnection().prepareStatement(query)) {
-            pstmt.setString(1, sec_id);
-            if(pstmt.executeUpdate() > 0) {
-                JOptionPane.showMessageDialog(null, "Successfully deleted a record.");
+        String query = "DELETE FROM section WHERE course_id = ? AND sec_id = ? AND semester = ? AND year = ? AND building = ? AND room_number = ? AND time_slot_id = ?";
+
+        try (PreparedStatement pstmt = conn.getConnection().prepareStatement(query)) {
+            pstmt.setString(1, course_id);
+            pstmt.setString(2, sec_id);
+            pstmt.setString(3, semester);
+            pstmt.setInt(4, year);
+            pstmt.setString(5, building);
+            pstmt.setString(6, room_number);
+            pstmt.setString(7, time_slot_id);
+            int rowsDeleted = pstmt.executeUpdate(); // Execute the query and get the number of rows affected
+            if (rowsDeleted > 0) {
+                JOptionPane.showMessageDialog(null, "Successfully deleted the record");
+            } else {
+                JOptionPane.showMessageDialog(null, "No records found");
             }
-        } catch(SQLException ex){
+        } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
     }

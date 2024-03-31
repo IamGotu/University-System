@@ -249,10 +249,16 @@ public class PrerequisiteForm extends javax.swing.JFrame {
 
     private void btn_deleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_deleteMouseClicked
         DefaultTableModel model = (DefaultTableModel) table_prereqs.getModel();
-        String course_id = model.getValueAt(table_prereqs.getSelectedRow(), 0).toString();
-        deletePrereq(course_id);
+        int selectedRow = table_prereqs.getSelectedRow();
 
-        displayPrereqs();
+        if (selectedRow != -1) { // Check if a row is selected
+            String course_id = model.getValueAt(selectedRow, 0).toString();
+            String prereq_id = model.getValueAt(selectedRow, 1).toString();    
+            deletePrereq(course_id, prereq_id);
+            displayPrereqs();
+        } else {
+            JOptionPane.showMessageDialog(null, "Please select a row to delete.");
+        }
     }//GEN-LAST:event_btn_deleteMouseClicked
 
     private void btn_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteActionPerformed
@@ -450,16 +456,20 @@ public class PrerequisiteForm extends javax.swing.JFrame {
     }
     
     // Delete prerequisite
-    private void deletePrereq(String course_id) {
+    private void deletePrereq(String course_id, String prereq_id) {
         DatabaseConnection conn = new DatabaseConnection();
-        String query = "DELETE FROM prereq WHERE course_id = ?";
-        
-        try(PreparedStatement pstmt = conn.getConnection().prepareStatement(query)) {
+        String query = "DELETE FROM prereq WHERE course_id = ? AND prereq_id = ?";
+
+        try (PreparedStatement pstmt = conn.getConnection().prepareStatement(query)) {
             pstmt.setString(1, course_id);
-            if(pstmt.executeUpdate() > 0) {
-                JOptionPane.showMessageDialog(null, "Successfully deleted a record.");
+            pstmt.setString(2, prereq_id);
+            int rowsDeleted = pstmt.executeUpdate(); // Execute the query and get the number of rows affected
+            if (rowsDeleted > 0) {
+                JOptionPane.showMessageDialog(null, "Successfully deleted the record");
+            } else {
+                JOptionPane.showMessageDialog(null, "No records found");
             }
-        } catch(SQLException ex){
+        } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
     }

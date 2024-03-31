@@ -257,10 +257,17 @@ public class DepartmentForm extends javax.swing.JFrame {
 
     private void btn_deleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_deleteMouseClicked
         DefaultTableModel model = (DefaultTableModel) table_departments.getModel();
-        String department = model.getValueAt(table_departments.getSelectedRow(), 0).toString();
-        deleteDepartments(department);
+        int selectedRow = table_departments.getSelectedRow();
 
-        displayDepartments();
+        if (selectedRow != -1) { // Check if a row is selected
+            String department = model.getValueAt(selectedRow, 0).toString();
+            String building = model.getValueAt(selectedRow, 1).toString();
+            double budget = Double.parseDouble(model.getValueAt(selectedRow, 2).toString());
+            deleteDepartment(department, building, budget);
+            displayDepartments();
+        } else {
+            JOptionPane.showMessageDialog(null, "Please select a row to delete.");
+        }
     }//GEN-LAST:event_btn_deleteMouseClicked
 
     private void btn_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteActionPerformed
@@ -399,17 +406,24 @@ public class DepartmentForm extends javax.swing.JFrame {
         // end
         
     }
-
-    private void deleteDepartments(String dept_name) {
+    
+    // Delete department
+    private void deleteDepartment(String department, String building, double budget) {
         DatabaseConnection conn = new DatabaseConnection();
-        String query = "DELETE FROM department WHERE dept_name = ?";
-        
-        try(PreparedStatement pstmt = conn.getConnection().prepareStatement(query)) {
-            pstmt.setString(1, dept_name);
-            if(pstmt.executeUpdate() > 0) {
-                JOptionPane.showMessageDialog(null, "Successfully deleted a record.");
+        String query = "DELETE FROM department WHERE dept_name = ? AND building = ? AND budget = ?";
+
+        try (PreparedStatement pstmt = conn.getConnection().prepareStatement(query)) {
+            pstmt.setString(1, department);
+            pstmt.setString(2, building);
+            pstmt.setDouble(3, budget);
+            
+            int rowsDeleted = pstmt.executeUpdate(); // Execute the query and get the number of rows affected
+            if (rowsDeleted > 0) {
+                JOptionPane.showMessageDialog(null, "Successfully deleted the record");
+            } else {
+                JOptionPane.showMessageDialog(null, "No records found");
             }
-        } catch(SQLException ex){
+        } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
     }

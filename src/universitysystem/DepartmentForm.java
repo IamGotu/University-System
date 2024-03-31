@@ -304,7 +304,19 @@ public class DepartmentForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_editMouseClicked
 
     private void btn_editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editActionPerformed
-        updateDepartmentData();
+        DefaultTableModel model = (DefaultTableModel) table_departments.getModel();
+        int selectedRow = table_departments.getSelectedRow();
+
+        if (selectedRow != -1) { // Check if a row is selected
+            String department = model.getValueAt(selectedRow, 0).toString();
+            String building = combo_building.getSelectedItem().toString();
+            double budget = Double.parseDouble(txt_budget.getText());
+            updateDepartmentData(department, building, budget);
+            displayDepartments();
+            clearTextFields();
+        } else {
+            JOptionPane.showMessageDialog(null, "Please select a row to edit.");
+        }
     }//GEN-LAST:event_btn_editActionPerformed
     
     /**
@@ -460,46 +472,26 @@ public class DepartmentForm extends javax.swing.JFrame {
     }
     
     // Update department data
-    private void updateDepartmentData() {
-    DefaultTableModel model = (DefaultTableModel) table_departments.getModel();
-    int selectedRowIndex = table_departments.getSelectedRow();
-    int selectedColumnIndex = table_departments.getSelectedColumn();
+    private void updateDepartmentData(String department, String building, double budget) {
+        DatabaseConnection conn = new DatabaseConnection();
+        String query = "UPDATE department SET building = ?, budget = ? WHERE dept_name = ?";
 
-    if (selectedRowIndex == -1) {
-        JOptionPane.showMessageDialog(null, "Please select a row to edit.");
-        return;
-    }
-    
-    if (selectedColumnIndex == -1) {
-        JOptionPane.showMessageDialog(null, "Please select a column to edit.");
-        return;
-    }
+        try (PreparedStatement pstmt = conn.getConnection().prepareStatement(query)) {
+            pstmt.setString(1, building);
+            pstmt.setDouble(2, budget);
+            pstmt.setString(3, department);
 
-    String department = model.getValueAt(selectedRowIndex, selectedColumnIndex).toString();
-    String building = combo_building.getSelectedItem().toString();
-    double budget = Double.parseDouble(txt_budget.getText());
-
-    DatabaseConnection conn = new DatabaseConnection();
-    String query = "UPDATE department SET building = ?, budget = ? WHERE dept_name = ?";
-
-    try (PreparedStatement pstmt = conn.getConnection().prepareStatement(query)) {
-        pstmt.setString(1, building);
-        pstmt.setDouble(2, budget);
-        pstmt.setString(3, department);
-
-        int rowsAffected = pstmt.executeUpdate();
-        if (rowsAffected > 0) {
-            JOptionPane.showMessageDialog(null, "Department data updated successfully.");
-            displayDepartments(); // Refresh table after update
-            clearTextFields();    // Clear text fields after update
-        } else {
-            JOptionPane.showMessageDialog(null, "Failed to update department data.");
+            int rowsAffected = pstmt.executeUpdate();
+            if (rowsAffected > 0) {
+                JOptionPane.showMessageDialog(null, "Department data updated successfully.");
+            } else {
+                JOptionPane.showMessageDialog(null, "Failed to update department data.");
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error updating department data: " + ex.getMessage());
+            ex.printStackTrace(); // Print stack trace for debugging
         }
-    } catch (SQLException ex) {
-        JOptionPane.showMessageDialog(null, "Error updating department data: " + ex.getMessage());
-        ex.printStackTrace(); // Print stack trace for debugging
     }
-}
 
     
     // Check department duplicates.

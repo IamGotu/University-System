@@ -277,10 +277,18 @@ public class CourseForm extends javax.swing.JFrame {
 
     private void btn_deleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_deleteMouseClicked
         DefaultTableModel model = (DefaultTableModel) table_courses.getModel();
-        String course_id = model.getValueAt(table_courses.getSelectedRow(), 0).toString();
-        deleteCourse(course_id);
+        int selectedRow = table_courses.getSelectedRow();
 
-        displayCourses();
+        if (selectedRow != -1) { // Check if a row is selected
+            String course_id = model.getValueAt(selectedRow, 0).toString();
+            String title = model.getValueAt(selectedRow, 1).toString();
+            String dept_name = model.getValueAt(selectedRow, 2).toString();
+            int credits = Integer.parseInt(model.getValueAt(selectedRow, 3).toString());
+            deleteCourse(course_id, title, dept_name, credits);
+            displayCourses();
+        } else {
+            JOptionPane.showMessageDialog(null, "Please select a row to delete.");
+        }
     }//GEN-LAST:event_btn_deleteMouseClicked
 
     private void btn_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteActionPerformed
@@ -432,16 +440,22 @@ public class CourseForm extends javax.swing.JFrame {
     }
     
     // Delete course
-    private void deleteCourse(String course_id) {
+    private void deleteCourse(String course_id, String title, String dept_name, int credits) {
         DatabaseConnection conn = new DatabaseConnection();
-        String query = "DELETE FROM course WHERE course_id = ?";
-        
-        try(PreparedStatement pstmt = conn.getConnection().prepareStatement(query)) {
+        String query = "DELETE FROM course WHERE course_id = ? AND title = ? AND dept_name = ? AND credits = ?";
+
+        try (PreparedStatement pstmt = conn.getConnection().prepareStatement(query)) {
             pstmt.setString(1, course_id);
-            if(pstmt.executeUpdate() > 0) {
-                JOptionPane.showMessageDialog(null, "Successfully deleted a record.");
+            pstmt.setString(2, title);
+            pstmt.setString(3, dept_name);
+            pstmt.setInt(4, credits);
+            int rowsDeleted = pstmt.executeUpdate(); // Execute the query and get the number of rows affected
+            if (rowsDeleted > 0) {
+                JOptionPane.showMessageDialog(null, "Successfully deleted the record");
+            } else {
+                JOptionPane.showMessageDialog(null, "No records found");
             }
-        } catch(SQLException ex){
+        } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
     }

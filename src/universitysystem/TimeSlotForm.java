@@ -287,10 +287,20 @@ public class TimeSlotForm extends javax.swing.JFrame {
 
     private void btn_deleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_deleteMouseClicked
         DefaultTableModel model = (DefaultTableModel) table_time_slots.getModel();
-        String time_slot_id = model.getValueAt(table_time_slots.getSelectedRow(), 0).toString();
-        deleteTimeSlots(time_slot_id);
+        int selectedRow = table_time_slots.getSelectedRow();
 
-        displayTimeSlots();
+        if (selectedRow != -1) { // Check if a row is selected
+            String time_slot_id = model.getValueAt(selectedRow, 0).toString();
+            String day = model.getValueAt(selectedRow, 1).toString();
+            int start_hr = Integer.parseInt(model.getValueAt(selectedRow, 2).toString());
+            int start_min = Integer.parseInt(model.getValueAt(selectedRow, 3).toString());
+            int end_hr = Integer.parseInt(model.getValueAt(selectedRow, 4).toString());
+            int end_min = Integer.parseInt(model.getValueAt(selectedRow, 5).toString());
+            deleteTimeSlots(time_slot_id, day, start_hr, start_min, end_hr, end_min);
+            displayTimeSlots();
+        } else {
+            JOptionPane.showMessageDialog(null, "Please select a row to delete.");
+        }
     }//GEN-LAST:event_btn_deleteMouseClicked
 
     private void btn_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteActionPerformed
@@ -433,17 +443,26 @@ public class TimeSlotForm extends javax.swing.JFrame {
         txt_end_min.setText("");
         txt_search.setText("");   
     }
-
-    private void deleteTimeSlots(String time_slot_id) {
+    
+    // Delete time slot
+    private void deleteTimeSlots(String time_slot_id, String day, int start_hr, int start_min, int end_hr, int end_min) {
         DatabaseConnection conn = new DatabaseConnection();
-        String query = "DELETE FROM time_slot WHERE time_slot_id = ?";
-        
-        try(PreparedStatement pstmt = conn.getConnection().prepareStatement(query)) {
+        String query = "DELETE FROM time_slot WHERE time_slot_id = ? AND day = ? AND start_hr = ? AND start_min = ? AND end_hr = ? AND end_min = ?";
+
+        try (PreparedStatement pstmt = conn.getConnection().prepareStatement(query)) {
             pstmt.setString(1, time_slot_id);
-            if(pstmt.executeUpdate() > 0) {
-                JOptionPane.showMessageDialog(null, "Successfully deleted a record.");
+            pstmt.setString(2, day);
+            pstmt.setInt(3, start_hr);
+            pstmt.setInt(4, start_min);
+            pstmt.setInt(5, end_hr);
+            pstmt.setInt(6, end_min);
+            int rowsDeleted = pstmt.executeUpdate(); // Execute the query and get the number of rows affected
+            if (rowsDeleted > 0) {
+                JOptionPane.showMessageDialog(null, "Successfully deleted the record");
+            } else {
+                JOptionPane.showMessageDialog(null, "No records found");
             }
-        } catch(SQLException ex){
+        } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
     }

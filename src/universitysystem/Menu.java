@@ -33,6 +33,7 @@ public class Menu extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jTabbedPane2 = new javax.swing.JTabbedPane();
+        jLabel2 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu_department = new javax.swing.JMenu();
         jMenu_instructor = new javax.swing.JMenu();
@@ -42,6 +43,7 @@ public class Menu extends javax.swing.JFrame {
         jMenu_time_slot = new javax.swing.JMenu();
         jMenu_section = new javax.swing.JMenu();
         jMenu_student = new javax.swing.JMenu();
+        jMenu_takes = new javax.swing.JMenu();
 
         jMenu3.setText("File");
         jMenuBar2.add(jMenu3);
@@ -69,10 +71,21 @@ public class Menu extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("MENU");
+        setBackground(new java.awt.Color(0, 51, 255));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Arial Black", 0, 36)); // NOI18N
         jLabel1.setText("ABC UNIVERSITY SYSTEM");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 190, -1, -1));
+        getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 0, 0));
+        getContentPane().add(jTabbedPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 0, 0));
 
+        jLabel2.setIcon(new javax.swing.ImageIcon("E:\\universitydb\\UniversitySystem\\src\\universitysystem\\pexels-pixabay-235985.jpg")); // NOI18N
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, -30, 800, 500));
+
+        jMenuBar1.setForeground(new java.awt.Color(0, 0, 255));
+
+        jMenu_department.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jMenu_department.setText("DEPARTMENTS");
         jMenu_department.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -86,6 +99,7 @@ public class Menu extends javax.swing.JFrame {
         });
         jMenuBar1.add(jMenu_department);
 
+        jMenu_instructor.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jMenu_instructor.setText("INSTRUCTORS");
         jMenu_instructor.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -99,6 +113,7 @@ public class Menu extends javax.swing.JFrame {
         });
         jMenuBar1.add(jMenu_instructor);
 
+        jMenu_classroom.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jMenu_classroom.setText("CLASSROOMS");
         jMenu_classroom.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -112,6 +127,7 @@ public class Menu extends javax.swing.JFrame {
         });
         jMenuBar1.add(jMenu_classroom);
 
+        jMenu_courses.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jMenu_courses.setText("COURSES");
         jMenu_courses.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -125,6 +141,7 @@ public class Menu extends javax.swing.JFrame {
         });
         jMenuBar1.add(jMenu_courses);
 
+        jMenu_prerequisite.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jMenu_prerequisite.setText("PREREQUISITES");
         jMenu_prerequisite.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -138,6 +155,7 @@ public class Menu extends javax.swing.JFrame {
         });
         jMenuBar1.add(jMenu_prerequisite);
 
+        jMenu_time_slot.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jMenu_time_slot.setText("TIME SLOTS");
         jMenu_time_slot.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -151,6 +169,7 @@ public class Menu extends javax.swing.JFrame {
         });
         jMenuBar1.add(jMenu_time_slot);
 
+        jMenu_section.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jMenu_section.setText("SECTIONS");
         jMenu_section.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -164,6 +183,7 @@ public class Menu extends javax.swing.JFrame {
         });
         jMenuBar1.add(jMenu_section);
 
+        jMenu_student.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jMenu_student.setText("STUDENTS");
         jMenu_student.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -177,24 +197,21 @@ public class Menu extends javax.swing.JFrame {
         });
         jMenuBar1.add(jMenu_student);
 
-        setJMenuBar(jMenuBar1);
+        jMenu_takes.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        jMenu_takes.setText("ENROLL");
+        jMenu_takes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu_takesMouseClicked(evt);
+            }
+        });
+        jMenu_takes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu_takesActionPerformed(evt);
+            }
+        });
+        jMenuBar1.add(jMenu_takes);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(269, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(169, 169, 169))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(122, 122, 122)
-                .addComponent(jLabel1)
-                .addContainerGap(431, Short.MAX_VALUE))
-        );
+        setJMenuBar(jMenuBar1);
 
         pack();
         setLocationRelativeTo(null);
@@ -272,6 +289,15 @@ public class Menu extends javax.swing.JFrame {
         student.setVisible(true);
     }//GEN-LAST:event_jMenu_studentMouseClicked
 
+    private void jMenu_takesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu_takesActionPerformed
+
+    }//GEN-LAST:event_jMenu_takesActionPerformed
+
+    private void jMenu_takesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu_takesMouseClicked
+        TakesForm takes = new TakesForm();
+        takes.setVisible(true);
+    }//GEN-LAST:event_jMenu_takesMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -309,6 +335,7 @@ public class Menu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
@@ -329,6 +356,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu_prerequisite;
     private javax.swing.JMenu jMenu_section;
     private javax.swing.JMenu jMenu_student;
+    private javax.swing.JMenu jMenu_takes;
     private javax.swing.JMenu jMenu_time_slot;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;

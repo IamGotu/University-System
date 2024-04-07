@@ -36,8 +36,6 @@ public class SectionForm extends javax.swing.JFrame {
         btn_search = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         table_section = new javax.swing.JTable();
-        btn_delete = new javax.swing.JButton();
-        btn_refresh = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         txt_year = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
@@ -55,11 +53,16 @@ public class SectionForm extends javax.swing.JFrame {
         combo_building = new javax.swing.JComboBox<>();
         combo_time_slot_id = new javax.swing.JComboBox<>();
         combo_room_number = new javax.swing.JComboBox<>();
+        btn_delete = new javax.swing.JButton();
+        btn_refresh = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("SECTION");
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txt_search.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        getContentPane().add(txt_search, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 12, 505, 34));
 
         btn_search.setBackground(new java.awt.Color(102, 102, 255));
         btn_search.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -76,6 +79,7 @@ public class SectionForm extends javax.swing.JFrame {
                 btn_searchActionPerformed(evt);
             }
         });
+        getContentPane().add(btn_search, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 10, 132, 34));
 
         table_section.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         table_section.setModel(new javax.swing.table.DefaultTableModel(
@@ -94,26 +98,7 @@ public class SectionForm extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(table_section);
 
-        btn_delete.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btn_delete.setText("DELETE");
-        btn_delete.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btn_deleteMouseClicked(evt);
-            }
-        });
-        btn_delete.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_deleteActionPerformed(evt);
-            }
-        });
-
-        btn_refresh.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btn_refresh.setText("REFRESH");
-        btn_refresh.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_refreshActionPerformed(evt);
-            }
-        });
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 64, 671, 406));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("ADD NEW SECTION"));
 
@@ -128,8 +113,10 @@ public class SectionForm extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel7.setText("SEMESTER");
 
+        btn_save.setBackground(new java.awt.Color(102, 102, 255));
         btn_save.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btn_save.setText("SAVE");
+        btn_save.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btn_save.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btn_saveMouseClicked(evt);
@@ -141,8 +128,10 @@ public class SectionForm extends javax.swing.JFrame {
             }
         });
 
+        btn_edit.setBackground(new java.awt.Color(102, 102, 255));
         btn_edit.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btn_edit.setText("EDIT");
+        btn_edit.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btn_edit.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btn_editMouseClicked(evt);
@@ -198,6 +187,31 @@ public class SectionForm extends javax.swing.JFrame {
             }
         });
 
+        btn_delete.setBackground(new java.awt.Color(102, 102, 255));
+        btn_delete.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btn_delete.setText("DELETE");
+        btn_delete.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btn_delete.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_deleteMouseClicked(evt);
+            }
+        });
+        btn_delete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_deleteActionPerformed(evt);
+            }
+        });
+
+        btn_refresh.setBackground(new java.awt.Color(102, 102, 255));
+        btn_refresh.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btn_refresh.setText("REFRESH");
+        btn_refresh.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btn_refresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_refreshActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -206,8 +220,12 @@ public class SectionForm extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btn_refresh)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btn_delete)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btn_edit, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btn_save))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
@@ -239,6 +257,9 @@ public class SectionForm extends javax.swing.JFrame {
                                     .addComponent(combo_room_number, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addContainerGap())
         );
+
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btn_delete, btn_edit, btn_refresh, btn_save});
+
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -273,49 +294,22 @@ public class SectionForm extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btn_save)
-                    .addComponent(btn_edit, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btn_edit, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btn_delete)
+                        .addComponent(btn_refresh)))
                 .addGap(16, 16, 16))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btn_delete)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btn_refresh))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(txt_search)
-                        .addGap(34, 34, 34)
-                        .addComponent(btn_search, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 671, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txt_search, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
-                    .addComponent(btn_search, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_refresh)
-                    .addComponent(btn_delete))
-                .addContainerGap())
-        );
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btn_delete, btn_edit, btn_refresh, btn_save});
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(689, 64, -1, -1));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon("E:\\universitydb\\UniversitySystem\\src\\universitysystem\\pexels-pixabay-235985.jpg")); // NOI18N
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1110, 520));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_searchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_searchMouseClicked
@@ -463,6 +457,7 @@ public class SectionForm extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> combo_departments;
     private javax.swing.JComboBox<String> combo_room_number;
     private javax.swing.JComboBox<String> combo_time_slot_id;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel5;
@@ -539,7 +534,7 @@ public class SectionForm extends javax.swing.JFrame {
             System.out.println(ex.getMessage());
         }
     }
-    
+
     // Populate the room number combobox
     private void getRoomNum() {
         DatabaseConnection conn = new DatabaseConnection();
@@ -695,20 +690,21 @@ public class SectionForm extends javax.swing.JFrame {
     private void updateSectionData(String course_id, String sec_id, String semester, int year,
                                    String building, String room_number, String time_slot_id) {        
         DatabaseConnection conn = new DatabaseConnection();
-        String query = "UPDATE section SET sec_id = ?, semester = ?, year = ?, building = ?, room_number = ?, time_slot_id = ? WHERE course_id = ?";
+        String query = "UPDATE section SET building = ?, room_number = ?, time_slot_id = ? WHERE course_id = ? AND sec_id = ? AND semester = ? AND year = ?";
 
 
         //String query = "UPDATE section SET sec_id = ?, semester = ?, year = ?, building = ?, room_number, time_slot_id WHERE course_id = ?";
 
         try (PreparedStatement pstmt = conn.getConnection().prepareStatement(query)) {
             
-            pstmt.setString(1, sec_id);
-            pstmt.setString(2, semester);
-            pstmt.setInt(3, year);
-            pstmt.setString(4, building);
-            pstmt.setString(5, room_number);
-            pstmt.setString(6, time_slot_id);
-            pstmt.setString(7, course_id);
+            
+            pstmt.setString(1, building);
+            pstmt.setString(2, room_number);
+            pstmt.setString(3, time_slot_id);
+            pstmt.setString(4, course_id);
+            pstmt.setString(5, sec_id);
+            pstmt.setString(6, semester);
+            pstmt.setInt(7, year);
 
             int rowsAffected = pstmt.executeUpdate();
             if (rowsAffected > 0) {

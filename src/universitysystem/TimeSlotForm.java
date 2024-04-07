@@ -28,8 +28,6 @@ public class TimeSlotForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btn_refresh = new javax.swing.JButton();
-        btn_delete = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         table_time_slots = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
@@ -47,32 +45,15 @@ public class TimeSlotForm extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
+        btn_delete = new javax.swing.JButton();
+        btn_refresh = new javax.swing.JButton();
         btn_search = new javax.swing.JButton();
         txt_search = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("TIME SLOTS");
-
-        btn_refresh.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btn_refresh.setText("REFRESH");
-        btn_refresh.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_refreshActionPerformed(evt);
-            }
-        });
-
-        btn_delete.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btn_delete.setText("DELETE");
-        btn_delete.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btn_deleteMouseClicked(evt);
-            }
-        });
-        btn_delete.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_deleteActionPerformed(evt);
-            }
-        });
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         table_time_slots.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         table_time_slots.setModel(new javax.swing.table.DefaultTableModel(
@@ -91,6 +72,8 @@ public class TimeSlotForm extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(table_time_slots);
 
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 64, 671, 350));
+
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("ADD NEW TIME SLOT"));
 
         txt_end_min.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -108,8 +91,10 @@ public class TimeSlotForm extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel7.setText("START HR");
 
+        btn_save.setBackground(new java.awt.Color(102, 102, 255));
         btn_save.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btn_save.setText("SAVE");
+        btn_save.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btn_save.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btn_saveMouseClicked(evt);
@@ -121,8 +106,10 @@ public class TimeSlotForm extends javax.swing.JFrame {
             }
         });
 
+        btn_edit.setBackground(new java.awt.Color(102, 102, 255));
         btn_edit.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btn_edit.setText("EDIT");
+        btn_edit.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btn_edit.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btn_editMouseClicked(evt);
@@ -149,6 +136,31 @@ public class TimeSlotForm extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel10.setText("STAR MIN");
 
+        btn_delete.setBackground(new java.awt.Color(102, 102, 255));
+        btn_delete.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btn_delete.setText("DELETE");
+        btn_delete.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btn_delete.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_deleteMouseClicked(evt);
+            }
+        });
+        btn_delete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_deleteActionPerformed(evt);
+            }
+        });
+
+        btn_refresh.setBackground(new java.awt.Color(102, 102, 255));
+        btn_refresh.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btn_refresh.setText("REFRESH");
+        btn_refresh.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btn_refresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_refreshActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -156,9 +168,13 @@ public class TimeSlotForm extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 226, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btn_refresh)
+                        .addGap(18, 18, 18)
+                        .addComponent(btn_delete)
+                        .addGap(18, 18, 18)
                         .addComponent(btn_edit, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(btn_save))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -176,7 +192,7 @@ public class TimeSlotForm extends javax.swing.JFrame {
                                     .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txt_end_hr, javax.swing.GroupLayout.DEFAULT_SIZE, 213, Short.MAX_VALUE)
                             .addComponent(txt_start_min, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -186,6 +202,9 @@ public class TimeSlotForm extends javax.swing.JFrame {
                             .addComponent(txt_end_min))))
                 .addContainerGap())
         );
+
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btn_delete, btn_edit, btn_refresh, btn_save});
+
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -215,11 +234,18 @@ public class TimeSlotForm extends javax.swing.JFrame {
                             .addComponent(jLabel8)))
                     .addComponent(jLabel10))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_save)
-                    .addComponent(btn_edit, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btn_edit, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btn_delete)
+                        .addComponent(btn_refresh)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btn_delete, btn_edit, btn_refresh, btn_save});
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(689, 64, -1, -1));
 
         btn_search.setBackground(new java.awt.Color(102, 102, 255));
         btn_search.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -236,48 +262,19 @@ public class TimeSlotForm extends javax.swing.JFrame {
                 btn_searchActionPerformed(evt);
             }
         });
+        getContentPane().add(btn_search, new org.netbeans.lib.awtextra.AbsoluteConstraints(551, 12, 132, 34));
 
         txt_search.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        getContentPane().add(txt_search, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 12, 505, 34));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btn_delete)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btn_refresh))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(txt_search)
-                        .addGap(34, 34, 34)
-                        .addComponent(btn_search, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 671, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txt_search, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
-                    .addComponent(btn_search, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_refresh)
-                    .addComponent(btn_delete))
-                .addContainerGap())
-        );
+        jLabel1.setBackground(new java.awt.Color(102, 102, 255));
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon("E:\\universitydb\\UniversitySystem\\src\\universitysystem\\pexels-pixabay-235985.jpg")); // NOI18N
+        jLabel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1110, 460));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_refreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_refreshActionPerformed
@@ -402,6 +399,7 @@ public class TimeSlotForm extends javax.swing.JFrame {
     private javax.swing.JButton btn_refresh;
     private javax.swing.JButton btn_save;
     private javax.swing.JButton btn_search;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -532,15 +530,19 @@ public class TimeSlotForm extends javax.swing.JFrame {
     private void updateTimeSlotData(String time_slot_id, String day, int start_hr,
                                     int start_min, int end_hr, int end_min) {        
         DatabaseConnection conn = new DatabaseConnection();
-        String query = "UPDATE time_slot SET day = ?, start_hr = ?, start_min = ?, end_hr = ?, end_min = ? WHERE time_slot_id = ?";
+        String query = "UPDATE time_slot SET end_hr = ?, end_min = ? WHERE time_slot_id = ? AND day = ? AND start_hr = ? AND start_min = ?";
 
         try (PreparedStatement pstmt = conn.getConnection().prepareStatement(query)) {
-            pstmt.setString(1, day);
-            pstmt.setInt(2, start_hr);
-            pstmt.setInt(3, start_min);
-            pstmt.setInt(4, end_hr);
-            pstmt.setInt(5, end_min);
-            pstmt.setString(6, time_slot_id);
+
+            pstmt.setInt(1, end_hr);
+            pstmt.setInt(2, end_min);
+            
+            pstmt.setString(3, time_slot_id);
+            pstmt.setString(4, day);
+            pstmt.setInt(5, start_hr);
+            pstmt.setInt(6, start_min);
+
+            
 
             int rowsAffected = pstmt.executeUpdate();
             if (rowsAffected > 0) {

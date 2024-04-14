@@ -218,7 +218,7 @@ public class ClassroomForm extends javax.swing.JFrame {
         });
         getContentPane().add(btn_search, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 10, 128, 35));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon("E:\\universitydb\\UniversitySystem\\src\\universitysystem\\pexels-pixabay-235985.jpg")); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon("E:\\universitydb\\UniversitySystem\\src\\universitysystem\\milky-way-2695569_1920.jpg")); // NOI18N
         jLabel2.setName(""); // NOI18N
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1050, 520));
 

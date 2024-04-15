@@ -245,7 +245,7 @@ public class CourseForm extends javax.swing.JFrame {
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 90, -1, 330));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon("E:\\universitydb\\UniversitySystem\\src\\universitysystem\\milky-way-2695569_1920.jpg")); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon("F:\\mark\\UniversitySystem\\src\\universitysystem\\pexels-pixabay-235985.jpg")); // NOI18N
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1340, 450));
 
         pack();

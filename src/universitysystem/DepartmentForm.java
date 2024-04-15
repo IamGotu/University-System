@@ -221,7 +221,7 @@ public class DepartmentForm extends javax.swing.JFrame {
         });
         getContentPane().add(btn_search, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 30, 132, 35));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("E:\\universitydb\\UniversitySystem\\src\\universitysystem\\milky-way-2695569_1920.jpg")); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon("F:\\mark\\UniversitySystem\\src\\universitysystem\\pexels-pixabay-235985.jpg")); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1090, 480));
 
         pack();

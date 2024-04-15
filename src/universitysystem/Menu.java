@@ -80,7 +80,7 @@ public class Menu extends javax.swing.JFrame {
         getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 0, 0));
         getContentPane().add(jTabbedPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 0, 0));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon("E:\\universitydb\\UniversitySystem\\src\\universitysystem\\milky-way-2695569_1920.jpg")); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon("F:\\mark\\UniversitySystem\\src\\universitysystem\\pexels-pixabay-235985.jpg")); // NOI18N
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, -30, 800, 500));
 
         jMenuBar1.setForeground(new java.awt.Color(0, 0, 255));

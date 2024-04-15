@@ -221,7 +221,7 @@ public class PrerequisiteForm extends javax.swing.JFrame {
 
         jLabel1.setBackground(new java.awt.Color(102, 102, 255));
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel1.setIcon(new javax.swing.ImageIcon("E:\\universitydb\\UniversitySystem\\src\\universitysystem\\milky-way-2695569_1920.jpg")); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon("F:\\mark\\UniversitySystem\\src\\universitysystem\\pexels-pixabay-235985.jpg")); // NOI18N
         jLabel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1030, 520));
 

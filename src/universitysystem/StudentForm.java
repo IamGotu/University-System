@@ -248,7 +248,7 @@ public class StudentForm extends javax.swing.JFrame {
         });
         getContentPane().add(btn_search, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 20, 132, 35));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon("E:\\universitydb\\UniversitySystem\\src\\universitysystem\\milky-way-2695569_1920.jpg")); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon("F:\\mark\\UniversitySystem\\src\\universitysystem\\pexels-pixabay-235985.jpg")); // NOI18N
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1080, 480));
 
         pack();
